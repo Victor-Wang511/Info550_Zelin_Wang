@@ -12,12 +12,20 @@ R packages are required such as here, dplyr, and lubricate.
 To execute my R markdown file, simply clone my repository and keep all the folders and files that you downloaded in one folder and execute the make command. 
 (Since I included the path for my dataset and code in my makefile, there is no need to break the existing hierarchy)
 
-The make command you need to run is: "make Info550_Zelin_Wang.html" or simply type "make".
-
+The make command you need to run is: "make report".
 You can also use the bash code: Rscript -e "rmarkdown::render('code/Info550_Zelin_Wang.Rmd')" to get the report.
-
-report will be generated in the "code" folder after executing the make command. 
-
 In case, I also pushed the report that I generated into my repository for your reference.
+
+For Executing the analysis by using Docker:
+1. Use command "docker pull zelinwang0511/info550" to pull the image from DockerHub. 
+
+2. Use Command "docker build -t (image name) ." to build the image locally. 
+
+3. Use commands 
+"docker run -it (image name) /bin/bash"
+"cd project"
+"make report" 
+
+to make the report.
 
 
