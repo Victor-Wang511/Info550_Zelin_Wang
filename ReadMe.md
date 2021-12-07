@@ -12,20 +12,36 @@ R packages are required such as here, dplyr, and lubricate.
 To execute my R markdown file, simply clone my repository and keep all the folders and files that you downloaded in one folder and execute the make command. 
 (Since I included the path for my dataset and code in my makefile, there is no need to break the existing hierarchy)
 
+Before making the report, you will need to make a directory called "output"first. 
 The make command you need to run is: "make report".
-You can also use the bash code: Rscript -e "rmarkdown::render('code/Info550_Zelin_Wang.Rmd')" to get the report.
+You can also use the bash code: Rscript -e "rmarkdown::render('code/Info550.Rmd')" to get the report.
 In case, I also pushed the report that I generated into my repository for your reference.
 
 For Executing the analysis by using Docker:
-1. Use command "docker pull zelinwang0511/info550" to pull the image from DockerHub. 
+1. to pull the image from DockerHub:
 
-2. Use Command "docker build -t (image name) ." to build the image locally. 
+```
+docker pull zelinwang0511/info550"
+```
+2. Run the pulled image:
+```
+###For windows user:
+docker run -v /mnt/c/Users/76325/Desktop/docker_output:/project/output -it zelinwang0511/info550 /bin/bash
 
-3. Use commands 
-"docker run -it (image name) /bin/bash"
-"cd project"
-"make report" 
-
-to make the report.
+###For mac user:
+docker run -v ~/docker_output:/project/output -it zelinwang0511/info550 /bin/bash
+```
+3. Change directory to project:
+```
+cd project
+```
+4. Generate a report, can you can find the report.html in the "docker_output" folder on your laptop.
+```
+make report
+```
+5. Exit:
+```
+exit
+```
 
 
