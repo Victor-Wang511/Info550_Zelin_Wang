@@ -20,7 +20,7 @@ For Executing the analysis by using Docker:
 1. to pull the image from DockerHub:
 
 ```
-docker pull zelinwang0511/info550"
+docker pull zelinwang0511/info550
 ```
 2. Run the pulled image:
 ```
