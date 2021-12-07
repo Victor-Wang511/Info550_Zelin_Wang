@@ -1,0 +1,63 @@
+---
+title: "info550"
+author: "Zelin_Wang"
+date: "2021/12/7"
+output: html_document
+---
+
+
+```{r}
+install.packages("here")
+here::i_am("code/info550.Rmd")
+```
+
+```{r}
+pickup<-read.csv(here::here("data/hiv_pickup.csv"))
+print(head(pickup,10))
+```
+
+
+```{r}
+#Data cleaning
+#Sort the raw dataset by sid and DATE_DISPENSED
+install.packages("dplyr")
+library(dplyr)
+pickup1<-pickup%>%arrange(pickup$sid,as.Date(pickup$DATE_DISPENSED,format="%Y/%m/%d"))
+print(head(pickup1,10))
+```
+
+```{r}
+#Since we are only interested in the one year follow up period, we only need to keep the records within one year since the first pharmacy pick up date.
+#In order to fulfill the agenda above, first we need to find out the first pick up date for all sid(Individuals)
+library(dplyr)
+pickup_initial <- pickup1 %>% group_by(pickup1$sid) %>% filter(row_number()==1)
+pickup_initial <- pickup_initial[-c(4)]
+print(head(pickup_initial,10))
+```
+
+```{r}
+#Get the year of the first pickup date for each sid
+#Get the frequency of pickup_initial
+pickup_initial$year_start=format(as.Date(pickup_initial$DATE_DISPENSED, format="%Y/%m/%d"),"%Y")
+print(pickup_initial)
+pickup_initial_count<-count(pickup_initial,year_start)
+pickup_initial_count<-pickup_initial_count[-7,]
+print(pickup_initial_count)
+```
+
+```{r}
+barp<-barplot(height=pickup_initial_count$n, names=pickup_initial_count$year_start, main = "# of individuals Initial pick up year", col = rainbow(7),ylim = c(0, 700))
+text(barp, pickup_initial_count$n+30, labels = pickup_initial_count$n)
+```
+
+
+
+```{r}
+#Add entire one year to the existing date column to obtain one-year periods.
+lt <- as.POSIXlt(as.Date(pickup_initial$DATE_DISPENSED,format="%Y/%m/%d"))
+install.packages("lubridate")
+library(lubridate)
+lt<-lt %m+% months(11)
+pickup_initial$date_disp_1YR_FU=as.Date(lt, format="%Y/%m/%d")
+print(head(pickup_initial,10))
+```
