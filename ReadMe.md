@@ -15,7 +15,6 @@ To execute my R markdown file, simply clone my repository and keep all the folde
 Before making the report, you will need to make a directory called "output"first. 
 The make command you need to run is: "make report".
 You can also use the bash code: Rscript -e "rmarkdown::render('code/Info550.Rmd')" to get the report.
-In case, I also pushed the report that I generated into my repository for your reference.
 
 For Executing the analysis by using Docker:
 1. to pull the image from DockerHub:
