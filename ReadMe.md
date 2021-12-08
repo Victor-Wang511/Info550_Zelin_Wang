@@ -25,9 +25,13 @@ docker pull zelinwang0511/info550
 2. Run the pulled image:
 ```
 ###For windows user:
+docker run -v （Pathway）:/project/output -it zelinwang0511/info550 /bin/bash 
+###Example that worked on my laptop:
 docker run -v /mnt/c/Users/76325/Desktop/docker_output:/project/output -it zelinwang0511/info550 /bin/bash
 
 ###For mac user:
+mkdir ~/docker_output
+Then:
 docker run -v ~/docker_output:/project/output -it zelinwang0511/info550 /bin/bash
 ```
 3. Change directory to project:
